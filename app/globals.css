@@ -60,7 +60,8 @@ body { margin:0; color:var(--ink); font-family:"HYShiGuangTiW", "JunJunHand", Ka
 .profile-art .back { top:14.4%; left:5.2%; }
 /* 双头像模板不沿用单头像画板中央预留圆圈。 */
 .avatar-row { top:46.9%; }
-.avatar-input { width:118px; height:118px; }
+.avatar-input { width:118px; height:118px; position:relative; isolation:isolate; background:#eefcfd; }
+.avatar-input img { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover; transform:scale(1.07); }
 .avatar-input i { padding-top:0; font-size:100px; line-height:118px; }
 .two-avatars .avatar-row { isolation:isolate; }
 .two-avatars .avatar-row::before { content:""; position:absolute; z-index:0; left:21%; top:-6px; width:58%; height:130px; background:#f7dce7 url("/assets/IMG_2554.PNG") center/402px 874px; }

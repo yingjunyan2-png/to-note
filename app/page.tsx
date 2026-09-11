@@ -3,7 +3,7 @@
 import { ChangeEvent, WheelEvent, useEffect, useRef, useState } from "react";
 
 type Screen = "home" | "profile" | "templates" | "generator" | "result" | "gallery-menu" | "gallery" | "message-intro" | "messages";
-type Slot = { x: number; y: number; size: number };
+type Slot = { x: number; y: number; size: number; cover?: number };
 type Template = { id: string; label: string; image: string; slots: Slot[]; text: { x: number; y: number; width: number; rotate?: number } };
 type BoardReply = { id: string; text: string; at: number };
 type BoardMessage = { id: string; text: string; at: number; likes: number; replies: BoardReply[] };
@@ -69,7 +69,8 @@ function randomCopy(previous = "") { const choices = copyLines.filter((line) => 
 function horizontalWheel(event: WheelEvent<HTMLElement>) { if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return; event.currentTarget.scrollLeft += event.deltaY; event.preventDefault(); }
 function readFile(file: File) { return new Promise<string>((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(String(reader.result)); reader.onerror = reject; reader.readAsDataURL(file); }); }
 function cropCircle(ctx: CanvasRenderingContext2D, image: HTMLImageElement, x: number, y: number, size: number) {
-  const side = Math.min(image.width, image.height); const sx = (image.width - side) / 2; const sy = (image.height - side) / 2;
+  // 头像略微放大：既保持人像居中，也完全盖住原模板的蓝色占位圆与描边。
+  const side = Math.min(image.width, image.height) * .88; const sx = (image.width - side) / 2; const sy = (image.height - side) / 2;
   ctx.save(); ctx.beginPath(); ctx.arc(x + size / 2, y + size / 2, size / 2, 0, Math.PI * 2); ctx.clip(); ctx.drawImage(image, sx, sy, side, side, x, y, size, size); ctx.restore();
 }
 function wrap(ctx: CanvasRenderingContext2D, value: string, maxWidth: number) { const lines: string[] = []; let line = ""; for (const char of value) { if (line && ctx.measureText(line + char).width > maxWidth) { lines.push(line); line = char; } else line += char; } if (line) lines.push(line); return lines; }
@@ -107,13 +108,17 @@ export default function ToSignSite() {
       ctx.drawImage(base, 0, 0, side, side);
       const avatarImages = await Promise.all(avatars.map((src) => new Promise<HTMLImageElement>((resolve) => { const image = new Image(); image.onload = () => resolve(image); image.src = src; })));
       const layout = layoutFor(selected);
-      layout.slots.forEach((slot, index) => { const image = avatarImages[index]; if (image) { const s = side * slot.size; cropCircle(ctx, image, side * slot.x - s / 2, side * slot.y - s / 2, s); } });
+      layout.slots.forEach((slot, index) => {
+        const image = avatarImages[index]; if (!image) return;
+        const s = side * slot.size * (slot.cover ?? 1.1);
+        cropCircle(ctx, image, side * slot.x - s / 2, side * slot.y - s / 2, s);
+      });
       const { text } = layout; const tx = side * text.x; const ty = side * text.y; const boxWidth = side * text.width; const boxHeight = side * text.height;
-      const padding = Math.min(20, Math.max(10, boxWidth * .045)); const usableWidth = boxWidth - padding * 2;
-      const fontScale = text.fontScale ?? 1; const toFont = Math.min(70, Math.max(32, usableWidth / 7)) * fontScale; let copyFont = Math.min(60, Math.max(30, usableWidth / 10)) * fontScale; const copyTop = padding + toFont * 1.3;
+      const padding = Math.min(22, Math.max(11, boxWidth * .05)); const usableWidth = boxWidth - padding * 2;
+      const fontScale = text.fontScale ?? 1; const toFont = Math.min(68, Math.max(31, usableWidth / 7.4)) * fontScale; let copyFont = Math.min(56, Math.max(29, usableWidth / 10.8)) * fontScale; const copyTop = padding + toFont * 1.48;
       ctx.save(); ctx.translate(tx, ty); if (text.rotate) ctx.rotate(text.rotate * Math.PI / 180); ctx.beginPath(); ctx.rect(0, 0, boxWidth, boxHeight); ctx.clip(); ctx.fillStyle = "#211d1d"; ctx.textBaseline = "top";
       ctx.font = `${toFont}px "HYShiGuangTiW", "JunJunHand", KaiTi, STKaiti, serif`; ctx.fillText(`To：${name.trim()}`, padding, padding);
-      let lines: string[] = []; let lineHeight = 0; do { ctx.font = `${copyFont}px "HYShiGuangTiW", "JunJunHand", KaiTi, STKaiti, serif`; lines = wrap(ctx, copy, usableWidth); lineHeight = copyFont * 1.26; if (copyTop + lines.length * lineHeight <= boxHeight - padding) break; copyFont -= 1; } while (copyFont > 14);
+      let lines: string[] = []; let lineHeight = 0; do { ctx.font = `${copyFont}px "HYShiGuangTiW", "JunJunHand", KaiTi, STKaiti, serif`; lines = wrap(ctx, copy, usableWidth); lineHeight = copyFont * 1.34; if (copyTop + lines.length * lineHeight <= boxHeight - padding) break; copyFont -= 1; } while (copyFont > 14);
       ctx.font = `${copyFont}px "HYShiGuangTiW", "JunJunHand", KaiTi, STKaiti, serif`; lines.forEach((line, index) => ctx.fillText(line, padding, copyTop + index * lineHeight)); ctx.restore();
     };
     base.src = selected.image;
