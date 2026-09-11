@@ -7,6 +7,9 @@ button { -webkit-tap-highlight-color:transparent; }
 body { margin:0; color:var(--ink); font-family:"HYShiGuangTiW", KaiTi, STKaiti, "Microsoft YaHei", cursive; }
 .site { min-height:100vh; display:grid; place-items:center; padding:20px; background:#f6d4e1; }
 .phone { position:relative; width:min(402px, calc(100vw - 40px)); aspect-ratio:402 / 874; overflow:hidden; background:#f7dbe6; box-shadow:0 20px 52px rgba(108,52,79,.25); }
+.site-footer { margin:4px 0 8px; font-family:"Microsoft YaHei",sans-serif; font-size:12px; line-height:1.5; text-align:center; }
+.site-footer a { color:#765c68; text-decoration:none; }
+.site-footer a:hover,.site-footer a:focus-visible { text-decoration:underline; }
 .artboard { position:absolute; inset:0; overflow:hidden; background:#f8dfe9; }
 .dots { background:#f7dce7 url("/assets/IMG_2554.PNG") center/cover; }
 .back { position:absolute; z-index:8; left:17px; top:65px; width:70px; height:70px; padding:0; border:0; border-radius:0; background:url("/assets/back-arrow.png") center/100% 100% no-repeat; color:transparent; cursor:pointer; }
@@ -61,4 +64,4 @@ body { margin:0; color:var(--ink); font-family:"HYShiGuangTiW", KaiTi, STKaiti, 
 .two-avatars .avatar-input { position:relative; z-index:1; }
 
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; } }
-@media (max-width:440px) { .site { display:block; padding:0; background:#f6d7e3; }.phone { width:100vw; min-height:calc(100vw * 874 / 402); box-shadow:none; }.artboard { min-height:100%; } }
+@media (max-width:440px) { .site { display:block; padding:0; background:#f6d7e3; }.phone { width:100vw; min-height:calc(100vw * 874 / 402); box-shadow:none; }.site-footer { margin:7px 0 11px; }.artboard { min-height:100%; } }

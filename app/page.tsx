@@ -140,6 +140,7 @@ export default function ToSignSite() {
   {custom && <div className="modal"><div className="modal-card"><button className="close" onClick={() => setCustom(false)}>×</button><h2>自定义 To 签文案</h2><textarea autoFocus maxLength={50} value={customValue} onChange={(e) => setCustomValue(e.target.value)} placeholder="写下你想说的话吧~" /><span>{customValue.length}/50</span><button onClick={() => { if (!customValue.trim()) return tell("先写一条文案吧~"); if (customValue.length > 50) return tell("文案最多 50 个字哦~"); setCopy(customValue.trim()); setCustom(false); }}>确认使用</button></div></div>}
   {lightbox && <div className="modal" onClick={() => setLightbox(null)}><div className="image-modal" onClick={(e) => e.stopPropagation()}><button className="close" onClick={() => setLightbox(null)}>×</button><img src={lightbox} alt="君君的高清插画" /><a href={lightbox} download>下载高清图</a><p>手机上可长按图片保存</p></div></div>}
   {toast && <div className="toast">{toast}</div>}
+  <footer className="site-footer"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">浙ICP备2026075455号</a></footer>
   </main>;
 }
 
