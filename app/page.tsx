@@ -38,12 +38,12 @@ const templatePositions = [
 ];
 
 const galleryGroups = {
-  "9比16": ["IMG_2390.JPG", "IMG_2395.JPG", "IMG_2399.JPG", "IMG_2492.JPG", "IMG_2493.JPG", "IMG_2494.JPG", "IMG_2599 2.PNG", "IMG_2600 2.PNG", "IMG_2618 2.JPG", "IMG_2619 2.JPG"],
-  "1比1": ["IMG_2423.JPG", "IMG_2477.JPG", "IMG_2538.PNG", "IMG_2539.PNG", "IMG_2553.JPG", "IMG_2582 2.PNG", "IMG_2583 2.PNG", "IMG_2584 2.PNG", "IMG_2585 2.PNG", "IMG_2586 2.PNG", "IMG_2587 2.PNG", "IMG_7203.JPG"],
-  "其他": ["28debae4925aa8e0bfb73dcf97f622a6.jpg", "IMG_2499.JPG", "IMG_2648 2.PNG", "IMG_2650 2.PNG", "IMG_2651 2.JPG", "IMG_2652 2.PNG"],
+  "9比16": ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.png", "08.png", "09.jpg", "10.jpg"],
+  "1比1": ["01.jpg", "02.jpg", "03.png", "04.png", "05.jpg", "06.png", "07.png", "08.png", "09.png", "10.png", "11.png", "12.jpg"],
+  "其他": ["01.jpg", "02.jpg", "03.png", "04.png", "05.jpg", "06.png"],
 } as const;
 
-const folderFor = (kind: keyof typeof galleryGroups) => kind === "9比16" ? "9比16" : kind === "1比1" ? "1比1" : "其他";
+const folderFor = (kind: keyof typeof galleryGroups) => kind === "9比16" ? "gallery/portrait" : kind === "1比1" ? "gallery/square" : "gallery/other";
 const galleryAssetUrl = (folder: string, file: string) => `/assets/${encodeURIComponent(folder)}/${encodeURIComponent(file)}`;
 const heroPhotos = ["/assets/IMG_2641 2.JPG", "/assets/IMG_2629 2.JPG", "/assets/IMG_2632 2.JPG", "/assets/IMG_2633 2.JPG", "/assets/IMG_2634 2.JPG"];
 
