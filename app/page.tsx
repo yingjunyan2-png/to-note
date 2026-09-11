@@ -21,15 +21,15 @@ const copyLines = [
 ];
 
 const templates: Template[] = [
-  { id: "wish", label: "许愿款", image: "/assets/IMG_2565.PNG", slots: [{ x: .80, y: .19, size: .23 }], text: { x: .17, y: .35, width: .56 } },
+  { id: "wish", label: "许愿款", image: "/assets/IMG_2569.PNG", slots: [], text: { x: .17, y: .35, width: .56 } },
   { id: "heart", label: "爱心心", image: "/assets/IMG_2571.PNG", slots: [{ x: .80, y: .59, size: .20 }], text: { x: .25, y: .22, width: .48 } },
-  { id: "dog", label: "小狗狗", image: "/assets/IMG_2569.PNG", slots: [], text: { x: .12, y: .31, width: .49 } },
+  { id: "dog", label: "小狗狗", image: "/assets/IMG_2565.PNG", slots: [{ x: .80, y: .182, size: .252 }], text: { x: .12, y: .31, width: .49 } },
   { id: "gift", label: "你的出现是礼物", image: "/assets/IMG_2572.PNG", slots: [{ x: .82, y: .45, size: .19 }], text: { x: .25, y: .50, width: .53 } },
-  { id: "note", label: "便签款", image: "/assets/IMG_2564.PNG", slots: [{ x: .62, y: .20, size: .21 }], text: { x: .23, y: .40, width: .58, rotate: -7 } },
-  { id: "friends", label: "闺蜜天下第一好", image: "/assets/IMG_2567.PNG", slots: [{ x: .18, y: .50, size: .22 }, { x: .82, y: .50, size: .22 }], text: { x: .25, y: .23, width: .50 } },
+  { id: "note", label: "便签款", image: "/assets/IMG_2564.PNG", slots: [{ x: .60, y: .20, size: .203 }], text: { x: .23, y: .40, width: .58, rotate: -7 } },
+  { id: "friends", label: "闺蜜天下第一好", image: "/assets/IMG_2567.PNG", slots: [{ x: .183, y: .51, size: .218 }, { x: .844, y: .51, size: .235 }], text: { x: .25, y: .23, width: .50 } },
   { id: "money", label: "钱来", image: "/assets/IMG_2568.PNG", slots: [{ x: .25, y: .26, size: .22 }], text: { x: .33, y: .34, width: .42 } },
   { id: "luck", label: "好运来", image: "/assets/IMG_2570.PNG", slots: [{ x: .18, y: .18, size: .20 }], text: { x: .17, y: .42, width: .50 } },
-  { id: "autumn", label: "秋季限定哦~", image: "/assets/IMG_2563.PNG", slots: [{ x: .22, y: .28, size: .22 }], text: { x: .26, y: .38, width: .48 } },
+  { id: "autumn", label: "秋季限定哦~", image: "/assets/IMG_2563.PNG", slots: [{ x: .212, y: .256, size: .204 }], text: { x: .26, y: .38, width: .48 } },
   { id: "birthday", label: "君君祝你生日快乐！", image: "/assets/IMG_2566.PNG", slots: [], text: { x: .16, y: .45, width: .68 } },
 ];
 
@@ -49,17 +49,17 @@ const heroPhotos = ["/assets/IMG_2641 2.JPG", "/assets/IMG_2629 2.JPG", "/assets
 
 type TemplateLayout = { slots: Slot[]; text: { x: number; y: number; width: number; height: number; rotate?: number; fontScale?: number } };
 
-// 每个位置均按用户标注的红框、蓝圈，以 1080px 模板画布换算。
+// 蓝色头像圈均按对应的原始模板画布换算，避免把不同模板的坐标混用。
 const templateLayouts: Record<string, TemplateLayout> = {
-  wish: { slots: [{ x: .80, y: .182, size: .252 }], text: { x: .178, y: .356, width: .50, height: .45, rotate: -3 } },
+  wish: { slots: [], text: { x: .178, y: .356, width: .50, height: .45, rotate: -3 } },
   heart: { slots: [{ x: .88, y: .591, size: .201 }], text: { x: .454, y: .357, width: .284, height: .47, fontScale: 1.4 } },
-  dog: { slots: [], text: { x: .102, y: .361, width: .43, height: .205 } },
+  dog: { slots: [{ x: .80, y: .182, size: .252 }], text: { x: .102, y: .361, width: .43, height: .205 } },
   gift: { slots: [{ x: .822, y: .455, size: .202 }], text: { x: .285, y: .502, width: .426, height: .331 } },
-  note: { slots: [{ x: .60, y: .221, size: .25 }], text: { x: .202, y: .444, width: .60, height: .33, rotate: -9 } },
-  friends: { slots: [{ x: .183, y: .53, size: .218 }, { x: .844, y: .53, size: .235 }], text: { x: .284, y: .185, width: .452, height: .284 } },
+  note: { slots: [{ x: .60, y: .20, size: .203 }], text: { x: .202, y: .444, width: .60, height: .33, rotate: -9 } },
+  friends: { slots: [{ x: .183, y: .51, size: .218 }, { x: .844, y: .51, size: .235 }], text: { x: .284, y: .185, width: .452, height: .284 } },
   money: { slots: [{ x: .257, y: .253, size: .238 }], text: { x: .268, y: .413, width: .372, height: .315, fontScale: 1.35 } },
   luck: { slots: [{ x: .165, y: .18, size: .211 }], text: { x: .265, y: .317, width: .343, height: .253, fontScale: 1.35 } },
-  autumn: { slots: [{ x: .212, y: .288, size: .204 }], text: { x: .315, y: .33, width: .262, height: .311, fontScale: 1.4 } },
+  autumn: { slots: [{ x: .212, y: .256, size: .204 }], text: { x: .315, y: .33, width: .262, height: .311, fontScale: 1.4 } },
   birthday: { slots: [], text: { x: .149, y: .541, width: .704, height: .28 } },
 };
 
@@ -101,7 +101,7 @@ export default function ToSignSite() {
     if (screen !== "result" || !canvasRef.current) return;
     const canvas = canvasRef.current; const base = new Image();
     base.onload = async () => {
-      try { await document.fonts.load('48px "JunJunHand"'); } catch { /* A system handwritten fallback is still available. */ }
+      try { await document.fonts.load('48px "HYShiGuangTiW"'); } catch { /* The included handwriting font remains the visual fallback until the licensed HY font file is supplied. */ }
       const side = 1080; canvas.width = side; canvas.height = side;
       const ctx = canvas.getContext("2d"); if (!ctx) return;
       ctx.drawImage(base, 0, 0, side, side);
@@ -112,9 +112,9 @@ export default function ToSignSite() {
       const padding = Math.min(20, Math.max(10, boxWidth * .045)); const usableWidth = boxWidth - padding * 2;
       const fontScale = text.fontScale ?? 1; const toFont = Math.min(70, Math.max(32, usableWidth / 7)) * fontScale; let copyFont = Math.min(60, Math.max(30, usableWidth / 10)) * fontScale; const copyTop = padding + toFont * 1.3;
       ctx.save(); ctx.translate(tx, ty); if (text.rotate) ctx.rotate(text.rotate * Math.PI / 180); ctx.beginPath(); ctx.rect(0, 0, boxWidth, boxHeight); ctx.clip(); ctx.fillStyle = "#211d1d"; ctx.textBaseline = "top";
-      ctx.font = `${toFont}px "JunJunHand", HYShiGuangTiW, KaiTi, STKaiti, serif`; ctx.fillText(`To：${name.trim()}`, padding, padding);
-      let lines: string[] = []; let lineHeight = 0; do { ctx.font = `${copyFont}px "JunJunHand", HYShiGuangTiW, KaiTi, STKaiti, serif`; lines = wrap(ctx, copy, usableWidth); lineHeight = copyFont * 1.26; if (copyTop + lines.length * lineHeight <= boxHeight - padding) break; copyFont -= 1; } while (copyFont > 14);
-      ctx.font = `${copyFont}px "JunJunHand", HYShiGuangTiW, KaiTi, STKaiti, serif`; lines.forEach((line, index) => ctx.fillText(line, padding, copyTop + index * lineHeight)); ctx.restore();
+      ctx.font = `${toFont}px "HYShiGuangTiW", "JunJunHand", KaiTi, STKaiti, serif`; ctx.fillText(`To：${name.trim()}`, padding, padding);
+      let lines: string[] = []; let lineHeight = 0; do { ctx.font = `${copyFont}px "HYShiGuangTiW", "JunJunHand", KaiTi, STKaiti, serif`; lines = wrap(ctx, copy, usableWidth); lineHeight = copyFont * 1.26; if (copyTop + lines.length * lineHeight <= boxHeight - padding) break; copyFont -= 1; } while (copyFont > 14);
+      ctx.font = `${copyFont}px "HYShiGuangTiW", "JunJunHand", KaiTi, STKaiti, serif`; lines.forEach((line, index) => ctx.fillText(line, padding, copyTop + index * lineHeight)); ctx.restore();
     };
     base.src = selected.image;
   }, [screen, selected, name, avatars, copy]);
