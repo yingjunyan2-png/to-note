@@ -51,9 +51,9 @@ type TemplateLayout = { slots: Slot[]; text: { x: number; y: number; width: numb
 
 // 蓝色头像圈均按对应的原始模板画布换算，避免把不同模板的坐标混用。
 const templateLayouts: Record<string, TemplateLayout> = {
-  wish: { slots: [], text: { x: .178, y: .356, width: .50, height: .45, rotate: -3 } },
+  wish: { slots: [], text: { x: .101, y: .361, width: .434, height: .21 } },
   heart: { slots: [{ x: .88, y: .591, size: .201 }], text: { x: .454, y: .357, width: .284, height: .47, fontScale: 1.4 } },
-  dog: { slots: [{ x: .80, y: .182, size: .252 }], text: { x: .102, y: .361, width: .43, height: .205 } },
+  dog: { slots: [{ x: .80, y: .182, size: .252 }], text: { x: .176, y: .298, width: .50, height: .47, rotate: -3 } },
   gift: { slots: [{ x: .822, y: .455, size: .202 }], text: { x: .285, y: .502, width: .426, height: .331 } },
   note: { slots: [{ x: .60, y: .20, size: .203 }], text: { x: .202, y: .444, width: .60, height: .33, rotate: -9 } },
   friends: { slots: [{ x: .183, y: .51, size: .218 }, { x: .844, y: .51, size: .235 }], text: { x: .284, y: .185, width: .452, height: .284 } },
